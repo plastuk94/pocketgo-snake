@@ -27,7 +27,7 @@ void draw(int x, int y, SDL_Surface* screen) {
 	blobRect.h = BLOB_HEIGHT;
 	SDL_FillRect(screen, NULL, 0x00000000);		/* Blank the screen */
 	SDL_FillRect(screen, &blobRect, 0xffffff00);	/* Draw the blob */ 
-	SDL_UpdateRect(screen, 0, 0, 0, 0);		/* Update the screen */
+	SDL_Flip(screen);				/* Update the screen */
 
 }
 
@@ -36,8 +36,9 @@ int main(int argc, char *argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf("Failed to initialize SDL!");
 	}
-
-	SDL_Surface* screen = SDL_SetVideoMode(WIDTH, HEIGHT, 0, 0);
+	
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_Surface* screen = SDL_SetVideoMode(WIDTH, HEIGHT, 16, SDL_SWSURFACE);
 	SDL_SetClipRect(screen, NULL);
 
 	int quit = 0;
